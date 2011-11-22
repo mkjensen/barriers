@@ -1,3 +1,14 @@
+Over time, this project should be a clean-up and further development of an
+application originating from a master's thesis that aimed to help biochemists.
+The thesis is titled "Energy Landscape Analysis for Peptides using Barrier
+Trees." The original text of this README is included below.
+
+Note that the project depends on several libraries and a nontrivial technical
+environment. A setup guide and/or a more accessible application should be made
+available in the coming months.
+
+---
+
 This project, the master's thesis of Martin Kamp Jensen, was developed using
 Eclipse [1]. The Eclipse project files are included in this distribution. This
 project can also be built and run using Apache Ant [2] by using the "build.xml"
