@@ -1,0 +1,86 @@
+; Optimization (steep, cg, bfgs) or MD
+integrator = md
+nsteps = 10000
+continuation = yes
+comm_mode = angular
+
+; caba: in case you ever want to use the gromacs local optimization techniques ...
+; ENERGY MINIMIZATION OPTIONS
+; Force tolerance and initial step-size
+emtol                    = 0.01
+emstep                   = 0.01
+; Max number of iterations in relax_shells
+niter                    = 100
+; Step size (ps^2) for minimization of flexible constraints
+fcstep                   = 0
+; Frequency of steepest descents steps when doing CG
+nstcgsteep               = 1000
+nbfgscorr                = 100
+
+; caba: you do not need to use a 'box' nor 'periodic boundary conditions'(PBC). 
+; this is only needed if explicit solvent is modeled.
+; NEIGHBORSEARCHING PARAMETERS
+; nblist update frequency
+nstlist                  = 0
+; ns algorithm (simple or grid)
+ns_type                  = simple
+; Periodic boundary conditions: xyz, no, xy
+pbc                      = no
+periodic_molecules       = no
+; nblist cut-off
+rlist                    = 0
+
+; simulation at finite temperature
+; GENERATE VELOCITIES FOR STARTUP RUN
+gen-vel                  = yes
+gen-temp                 = 300
+gen-seed                 = 173529
+
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+; Temperature coupling
+Tcoupl                   = v-rescale
+nsttcouple               = -1
+nh-chain-length          = 10
+; Groups to couple separately
+tc-grps                  = System
+; Time constant (ps) and reference temperature (K)
+tau-t                    = 0.1
+ref-t                    = 300
+
+; caba: this section control the output options, e.g., frequency of frames written to trajectories.
+; OUTPUT CONTROL OPTIONS
+; Output frequency for coords (x), velocities (v) and forces (f)
+nstxout                  = 100
+nstvout                  = 100
+nstfout                  = 0
+; Output frequency for energies to log file and energy file
+nstlog                   = 100
+;nstcalcenergy            = -1
+nstcalcenergy            = 10 ; MKJ, number of energy frames MUST match number of XTC frames.
+;nstenergy                = 100
+nstenergy                = 10 ; MKJ
+; Output frequency and precision for xtc file
+nstxtcout                = 10
+xtc-precision            = 1000
+; This selects the subset of atoms for the xtc file. You can
+; select multiple groups. By default all atoms will be written.
+xtc-grps                 =
+; Selection of energy groups
+energygrps               =
+
+
+
+
+
+; caba: simplifying non-bonded interactions:
+; OPTIONS FOR ELECTROSTATICS AND VDW
+; Method for doing electrostatics
+coulombtype              = cut-off
+rcoulomb_switch          = 0
+rcoulomb                 = 0
+; Method for doing Van der Waals
+vdw-type                 = cut-off
+; cut-off lengths
+rvdw_switch              = 0
+rvdw                     = 0
+

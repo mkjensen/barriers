@@ -1,0 +1,3 @@
+#!/bin/bash
+DIR=`dirname $0`/
+LD_PRELOAD=/usr/local/lib/libopenbabel.so java -Xmx1G -cp ${DIR}bin:${DIR}lib/* -Djava.library.path=${DIR}lib/native -Djna.library.path=${DIR}lib/native com.martinkampjensen.thesis.Main $*

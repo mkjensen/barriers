@@ -1,0 +1,47 @@
+#!/bin/bash
+
+function pause() {
+  read -p "Press Enter to continue..."
+}
+
+# Prepare your input
+# I choose:
+# - OPLS force field
+# - termination: always none (we have blocked termini  by ACE and NAC)
+pdb2gmx -f AcAANMe.pdb -o AcAANMe.gro -p AcAANMe.top -water none -inter << EOF
+14
+3
+3
+EOF
+
+# energy minimization in vacuo
+pause
+grompp -f em_vacuo.mdp -c AcAANMe.gro -p AcAANMe.top -o em_vacuo
+pause
+mdrun -s em_vacuo.tpr -v -c AcAANMe_em-vacuo.gro
+
+# energy minimization in implicit solvent
+# i am not yet very familiar with the different GBSA flavors
+# have to read a bit more ...
+# I added the following line to GMX-4.5.3/share/gromacs/top/oplsaa.ff/gbsa.itp
+#'opls_242   0.19   1     1.045    0.190    0.72 ; mod by caba, CH3 group in an NME residue'
+pause
+grompp -f em_gbsa.mdp -c AcAANMe.gro -p AcAANMe.top -o em_gbsa
+pause
+mdrun -s em_gbsa.tpr -v -c AcAANMe_em-gbsa.gro
+
+# short MD
+pause
+grompp -f md_gbsa.mdp -c AcAANMe_em-gbsa.gro -p AcAANMe.top -o md_gbsa
+pause
+mdrun -deffnm md_gbsa -s md_gbsa.tpr -v
+
+# take a look on it
+# fitting, remove rotations etc ...
+pause
+trjconv -f md_gbsa.xtc -o md_gbsa_fit.xtc -s AcAANMe_em-gbsa.gro -fit progressive -dt 1
+
+# visualization with vmd
+# download here: www.ks.uiuc.edu/Research/vmd/ 
+# 1st load a gro file: 'AcAANMe_em-gbsa.gro' 
+# 2nd load the trajectory: 'md_gbsa_fit.xtc'

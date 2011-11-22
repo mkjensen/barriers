@@ -1,0 +1,49 @@
+What I (caba) have done here:
+# Smiles files:
+# Ethane.smi:
+CC
+# Propane.smi
+CCC
+# Butane.smi
+CCCC
+# t-Butane.smi ; the first branched alkane
+CC(C)C
+
+
+# Converting smi to pdb, including creating 3d structure and adding Hydrogens
+~/Progs/openbabel-2.3.0/bin/bin/obabel -ismi Ethane.smi -o pdb -OEthane.pdb --gen3D
+
+# Prepare top with an old Gromacs version (VERSION 3.3.3)
+x2top -f Ethane.pdb -o out.top  -ff oplsaa -v
+
+# does x2top still exist in recent versions of gromacs?
+# stupid me: the name was changed to g_x2top
+# seems to work too. but still only for the OPLS force field
+g_x2top -f Ethane.pdb -o out.top  -ff oplsaa -v
+
+# changing the topology to amber03 is easy:
+#	- change the 'include' statement
+#	- change the atom types to 'CT' and 'HC'
+#	- adopt charge groups (optional)
+#	- delete all explictly given parameters
+#	- change dihedral angle types to '9'
+
+########
+########
+########
+
+# For Martin:
+# There are four directories with eval scripts 
+# (similar to the ones your created)
+# the files: 
+# caba-optimization.mdp ...	options file for geometry optimization
+# caba-shortMD.mdp ...		options file for a short md simulation
+# eval ... 			performs geometry optimization
+# eval_md ...			performs short MD simulation
+
+# If you installed Gromacs in a non-standard location,
+# do you export the GMXLIB variable?
+# This is important to make gromacs find the force field parameters.
+# Check: first line of 'top' files
+
+

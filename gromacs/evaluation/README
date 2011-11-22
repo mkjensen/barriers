@@ -1,0 +1,14 @@
+1) Execute prepare path/to/molecule.pdb path/to/topology.top
+   to generate files needed for evaluation.
+2) Execute evaluate path/to/conformation.pdb (or evaluate_d)
+   to calculate the energy value(s).
+3) Parse the generated energy file if there are multiple
+   energy values or execute energy which prints the line
+   containing the potential energy value (it is slow and it
+   is only correct if the energy file contains one frame).
+
+Steps 2 and 3 can be repeated multiple times after step 1.
+
+Temporary files and the energy file will be written to the
+directory in which the evaluate script is executed. In
+Ubuntu, e.g. /dev/shm (RAM) could be used.

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<project name="Thesis" default="build">
+	<property name="lib" location="lib"/>
+	<property name="native" location="${lib}/native"/>
+	<property name="src" location="src"/>
+	<fileset id="src-tests" dir="${src}" includes="**/*Test*.java"/>
+	<property name="main-class" value="com.martinkampjensen.thesis.Main"/>
+	<property name="output-classes" location="bin"/>
+	<property name="output-jar" location="thesis.jar"/>
+	<path id="classpath">
+		<fileset dir="${lib}" includes="**/*.jar"/>
+		<pathelement path="${output-classes}"/>
+	</path>
+	<property name="xmlschema" location="xmlschema-temp"/>
+	
+	<target name="clean">
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${output-classes}"/>
+			<fileset file="${output-jar}"/>
+		</delete>
+	</target>
+	
+	<target name="xmlschema">
+		<mkdir dir="${xmlschema}"/>
+		<exec executable="schemagen">
+			<arg value="-d"/>
+			<arg value="${xmlschema}"/>
+			<arg value="-cp"/>
+			<arg value="${output-classes}"/>
+			<arg value="src/com/martinkampjensen/thesis/job/*.java"/>
+		</exec>
+		<move file="${xmlschema}/schema1.xsd" tofile="jobs/job.xsd"/>
+		<delete includeemptydirs="true">
+			<fileset dir="${xmlschema}"/>
+		</delete>
+	</target>
+	
+	<target name="build">
+		<mkdir dir="${output-classes}"/>
+		<javac
+			includeantruntime="false"
+			classpathref="classpath"
+			srcdir="${src}" 
+			destdir="${output-classes}"/>
+	</target>
+	
+	<target name="test" depends="build">
+		<junit fork="true">
+			<classpath>
+				<path refid="classpath"/>
+			</classpath>
+			<jvmarg value="-Djna.library.path=${native}"/>
+			<batchtest>
+				<fileset refid="src-tests"/>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="jar" depends="build">
+		<jar basedir="${output-classes}" destfile="${output-jar}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run-visualize" depends="build">
+		<java fork="true" classpathref="classpath" classname="${main-class}">
+			<jvmarg value="-Djava.library.path=${native}"/>
+			<arg value="--visualize"/>
+			<arg value="com.martinkampjensen.thesis.models.AAtomModel"/>
+		</java>
+	</target>
+</project>

@@ -1,0 +1,89 @@
+#include "amber03.ff/forcefield.itp"
+
+[ moleculetype ]
+; Name            nrexcl
+PRP                 3
+
+[ atoms ]
+;   nr       type  resnr residue  atom   cgnr     charge       mass  typeB    chargeB      massB
+
+     1         CT      1    PRP     C1      1      -0.18     12.011   ; qtot -0.18
+     2         CT      1    PRP     C2      2      -0.12     12.011   ; qtot -0.3
+     3         CT      1    PRP     C3      3      -0.18     12.011   ; qtot -0.48
+     4         HC      1    PRP    H11      1       0.06      1.008   ; qtot -0.42
+     5         HC      1    PRP    H12      1       0.06      1.008   ; qtot -0.36
+     6         HC      1    PRP    H13      1       0.06      1.008   ; qtot -0.3
+     7         HC      1    PRP    H21      2       0.06      1.008   ; qtot -0.24
+     8         HC      1    PRP    H22      2       0.06      1.008   ; qtot -0.18
+     9         HC      1    PRP    H31      3       0.06      1.008   ; qtot -0.12
+    10         HC      1    PRP    H32      3       0.06      1.008   ; qtot -0.06
+    11         HC      1    PRP    H33      3       0.06      1.008   ; qtot 0
+
+[ bonds ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     2     1  
+    1     4     1  
+    1     5     1  
+    1     6     1  
+    2     3     1  
+    2     7     1  
+    2     8     1  
+    3     9     1  
+    3    10     1  
+    3    11     1  
+
+[ pairs ]
+;  ai    aj funct            c0            c1            c2            c3
+    1     9     1
+    1    10     1
+    1    11     1
+    3     4     1
+    3     5     1
+    3     6     1
+    4     7     1
+    4     8     1
+    5     7     1
+    5     8     1
+    6     7     1
+    6     8     1
+    7     9     1
+    7    10     1
+    7    11     1
+    8     9     1
+    8    10     1
+    8    11     1
+
+[ angles ]
+;  ai    aj    ak funct            c0            c1            c2            c3
+    2     1     4     1  
+    2     1     5     1  
+    2     1     6     1  
+    4     1     5     1  
+    4     1     6     1  
+    5     1     6     1  
+    1     2     3     1  
+    1     2     7     1  
+    1     2     8     1  
+    3     2     7     1  
+    3     2     8     1  
+    7     2     8     1  
+    2     3     9     1  
+    2     3    10     1  
+    2     3    11     1  
+    9     3    10     1  
+    9     3    11     1  
+   10     3    11     1  
+
+[ dihedrals ]
+;  ai    aj    ak    al funct            c0            c1            c2            c3            c4            c5
+    4     1     2     3     9
+    1     2     3     9     9
+
+[ system ]
+; Name
+PRP
+
+[ molecules ]
+; Compound        #mols
+PRP                 1
+

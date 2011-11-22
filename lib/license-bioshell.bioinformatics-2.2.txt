@@ -1,0 +1,9 @@
+BioShell is a closed-source package that publicly available for academic
+non-profit institutions.
+
+Please, cite BioShell as:
+D. Gront and A. Kolinski "Utility library for structural bioinformatics"
+Bioinformatics 2008 24(4):584-585
+
+D. Gront and A. Kolinski "BioShell - a package of tools for structural biology
+computations" Bioinformatics 2006 22(5):621-622

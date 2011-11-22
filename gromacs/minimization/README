@@ -1,0 +1,8 @@
+1) Execute minimize path/to/conformation.pdb
+   path/to/topology.top (or minimize_d) to minimize.
+2) Read the output conformation and/or the energy file
+   to work with the minimized result.
+
+Temporary files and the energy file will be written to the
+directory in which the minimize script is executed. In
+Ubuntu, e.g. /dev/shm (RAM) could be used.

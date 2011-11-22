@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://martinkampjensen.com/thesis/job" xmlns:tns="http://martinkampjensen.com/thesis/job" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="job" type="tns:job"/>
+
+  <xs:complexType name="analysis" final="extension restriction">
+    <xs:all>
+      <xs:element name="output" type="xs:string" default="results/analysis.pdf"/>
+      <xs:element name="configs" type="xs:int" default="10"/>
+      <xs:element name="deltas" type="xs:int" default="20"/>
+      <xs:element name="samples" type="xs:int" default="10000"/>
+      <xs:element name="delta" type="xs:double" default="0.25"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="barriers" final="extension restriction">
+    <xs:all>
+      <xs:element name="constructor" type="xs:string" default="com.martinkampjensen.thesis.barriers.AllMinimaPairsConstructor"/>
+      <xs:element name="threshold" type="xs:double" default="1.7976931348623157E308"/>
+      <xs:element name="structurer" type="xs:string" default="com.martinkampjensen.thesis.barriers.structuring.WeightStructurer" minOccurs="0"/>
+      <xs:element name="colorer" type="xs:string" default="com.martinkampjensen.thesis.barriers.coloring.AngleDifferenceColorer" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="connection" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="connector" type="xs:string" default="com.martinkampjensen.thesis.connection.DirectConnector"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="evaluation" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="evaluator" type="xs:string" default="com.martinkampjensen.thesis.evaluation.LennardJonesEvaluator"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="input" final="extension restriction">
+    <xs:all>
+      <xs:element name="type" type="tns:inputType"/>
+      <xs:element name="location" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="job" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" default="Unnamed job" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" default="" minOccurs="0"/>
+      <xs:element name="input" type="tns:input"/>
+      <xs:element name="action" type="tns:action"/>
+      <xs:element name="options" type="tns:options" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="options" final="extension restriction">
+    <xs:all>
+      <xs:element name="seed" type="xs:long" default="42"/>
+      <xs:element name="analysis" type="tns:analysis" minOccurs="0"/>
+      <xs:element name="barriers" type="tns:barriers" minOccurs="0"/>
+      <xs:element name="connection" type="tns:connection" minOccurs="0"/>
+      <xs:element name="evaluation" type="tns:evaluation" minOccurs="0"/>
+      <xs:element name="minimization" type="tns:minimization" minOccurs="0"/>
+      <xs:element name="sampling" type="tns:sampling" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="minimization" final="extension restriction">
+    <xs:all>
+      <xs:element name="minimizer" type="xs:string" default="com.martinkampjensen.thesis.minimization.NelderMeadMinimizer"/>
+      <xs:element name="minima" type="xs:int" default="10"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="sampling" final="extension restriction">
+    <xs:all>
+      <xs:element name="sampler" type="xs:string" default="com.martinkampjensen.thesis.sampling.RandomSampler"/>
+      <xs:element name="samples" type="xs:int" default="10000"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:simpleType name="action">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="analyze"/>
+      <xs:enumeration value="evaluate"/>
+      <xs:enumeration value="minimize"/>
+      <xs:enumeration value="print"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="inputType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="class"/>
+      <xs:enumeration value="pdb"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

@@ -1,0 +1,2 @@
+Execute prepare path/to/original.pdb to generate files needed for
+the scripts in certain subdirectories (e.g. evaluation).

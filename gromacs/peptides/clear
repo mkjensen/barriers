@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm -f *.gro *.top *.itp mdout.mdp *.tpr *.trr *.edr *.log *#* *.xvg *.xtc *.cpt

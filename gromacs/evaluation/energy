@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# energy, for printing the potential energy value in a GROMACS energy file to stdout.
+# Tested using GROMACS 4.5.4.
+
+# Input files.
+INPUT_ENERGY=$1
+
+# Temporary files.
+TEMP_XVG=temp.xvg
+
+# Avoid GROMACS backup files.
+rm -f $TEMP_XVG
+
+# Print energy.
+g_energy -f $INPUT_ENERGY -o $TEMP_XVG << EOF 2> /dev/null | grep "Potential"
+9
+0
+EOF

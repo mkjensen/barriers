@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:job xmlns:tns="http://martinkampjensen.com/thesis/job"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://martinkampjensen.com/thesis/job job.xsd"
+	version="1.0">
+	<name>Test job</name>
+	<input>
+		<type>class</type>
+		<location>com.martinkampjensen.thesis.models.AAtomModel</location>
+	</input>
+	<action>print</action>
+	<options>
+		<seed>12345</seed>
+		<evaluation>
+			<evaluator>com.martinkampjensen.thesis.evaluation.LennardJonesEvaluator</evaluator>
+		</evaluation>
+	</options>
+</tns:job>

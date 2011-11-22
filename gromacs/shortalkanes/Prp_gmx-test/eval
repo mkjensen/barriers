@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function pause() {
+  read -p "Press Enter to continue..."
+}
+
+
+grompp_d -f caba-optimization.mdp -c ../Propane.pdb -p ../Propane.top -o evaluation.tpr
+pause
+mdrun_d -s evaluation.tpr -v
+

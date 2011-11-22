@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:job xmlns:tns="http://martinkampjensen.com/thesis/job"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://martinkampjensen.com/thesis/job job.xsd"
+	version="1.0">
+	<name>Analysis test</name>
+	<input>
+		<type>pdb</type>
+		<location>gromacs\AcAlaNMe_gmx.pdb</location>
+	</input>
+	<action>analyze</action>
+	<options>
+		<seed></seed>
+		<analysis>
+			<output>results/analysis-test.pdf</output>
+			<configs>5</configs>
+			<deltas>10</deltas>
+			<samples>5000</samples>
+			<delta>0.25</delta>
+		</analysis>
+	</options>
+</tns:job>

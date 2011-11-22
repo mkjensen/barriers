@@ -1,0 +1,19 @@
+This project, the master's thesis of Martin Kamp Jensen, was developed using
+Eclipse [1]. The Eclipse project files are included in this distribution. This
+project can also be built and run using Apache Ant [2] by using the "build.xml"
+Ant build script.
+
+This project requires a Java Runtime Environment compatible with Java SE Runtime
+Environment 6 from Oracle [3].
+
+The source code is licensed under the Apache License, Version 2.0 found in the
+LICENSE file. The external libraries used by this project is released under
+different licenses available in the "lib" directory. In particular, note that
+the BioShell library is a closed-source package that is publicly available for
+academic non-profit institutions.
+
+Contact: Martin Kamp Jensen <martin.kamp.jensen@gmail.com>
+
+[1] http://eclipse.org/
+[2] http://ant.apache.org/
+[3] http://www.oracle.com/technetwork/java/javase/downloads/index.html

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# minimize, for minimizing a conformation using GROMACS.
+# Tested using GROMACS 4.5.4.
+
+# Directory of this script.
+DIR=`dirname $0`/
+
+# Input files.
+INPUT_CONFORMATION=$1
+INPUT_TOPOLOGY=$2
+
+# Output files.
+OUTPUT_CONFORMATION=output.pdb
+OUTPUT_ENERGY=output.edr
+
+# Temporary files.
+TEMP_MDP=temp.mdp
+TEMP_TPR=temp.tpr
+TEMP_TRR=temp.trr
+TEMP_LOG=temp.log
+
+# Avoid GROMACS backup files.
+export GMX_MAXBACKUP=-1
+
+# Create run file.
+grompp -f ${DIR}minimization.mdp -po $TEMP_MDP -c $INPUT_CONFORMATION -p $INPUT_TOPOLOGY -o $TEMP_TPR > /dev/null
+
+# Execute run file.
+mdrun -s $TEMP_TPR -o $TEMP_TRR -c $OUTPUT_CONFORMATION -e $OUTPUT_ENERGY -g $TEMP_LOG > /dev/null

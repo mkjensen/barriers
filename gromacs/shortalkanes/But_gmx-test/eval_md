@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function pause() {
+  read -p "Press Enter to continue..."
+}
+
+
+grompp_d -f caba-shortMD.mdp -c ../Butane.pdb -p ../Butane.top -o evaluation.tpr
+pause
+mdrun_d -s evaluation.tpr -x traj.xtc -v
+

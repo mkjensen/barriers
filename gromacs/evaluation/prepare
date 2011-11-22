@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# prepare, for preparing a molecule for evaluation using GROMACS.
+# Tested using GROMACS 4.5.4.
+
+# Directory of this script.
+DIR=`dirname $0`/
+
+# Input files.
+INPUT_RUNFILE=${DIR}evaluation.mdp
+INPUT_CONFORMATION=$1
+INPUT_TOPOLOGY=$2
+
+# Output files.
+OUTPUT_RUNFILE=evaluation.tpr
+
+# Temporary files.
+TEMP_MDP=temp.mdp
+
+# Avoid GROMACS backup files.
+rm -f $OUTPUT_RUNFILE $TEMP_MDP
+
+# Create run file.
+grompp -f $INPUT_RUNFILE -po $TEMP_MDP -c $INPUT_CONFORMATION -p $INPUT_TOPOLOGY -o $OUTPUT_RUNFILE

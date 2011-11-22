@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# prepare, for preparing a molecule for use with GROMACS and the thesis of Martin Kamp Jensen.
+# Tested using GROMACS 4.5.4.
+
+# Input files.
+INPUT_MOLECULE=$1
+
+# Output files.
+OUTPUT_CONFORMATION=output.pdb
+OUTPUT_TOPOLOGY=output.top
+OUTPUT_INCLUDE=output.itp
+
+# Avoid GROMACS backup files.
+rm -f $OUTPUT_CONFORMATION $OUTPUT_TOPOLOGY $OUTPUT_INCLUDE
+
+pdb2gmx -f $INPUT_MOLECULE -o $OUTPUT_CONFORMATION -p $OUTPUT_TOPOLOGY -i $OUTPUT_INCLUDE -water none -inter << EOF
+14
+3
+3
+EOF

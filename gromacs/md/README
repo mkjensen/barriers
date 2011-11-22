@@ -1,0 +1,9 @@
+1) Execute md path/to/conformation.pdb
+   path/to/topology.top (or md_d) to perform a molecular
+   dynamics simulation.
+2) Read and parse the output trajectory and the energy
+   file.
+
+Temporary files and the output files will be written to
+the directory in which the md script is executed. In
+Ubuntu, e.g. /dev/shm (RAM) could be used.
