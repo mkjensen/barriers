@@ -38,7 +38,7 @@ public interface Constant
 	 * 
 	 * @see HelpFormatter#setShellCommand(String)
 	 */
-	String SHELL_COMMAND = "thesis";
+	String SHELL_COMMAND = "barriers";
 
 	/**
 	 * The file containing the XML Schema for job XML files. 
