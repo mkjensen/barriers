@@ -47,9 +47,11 @@
 	
 	<target name="test" depends="build">
 		<junit fork="true">
+			<env key="LD_PRELOAD" value="/usr/local/lib/libopenbabel.so"/>
 			<classpath>
 				<path refid="classpath"/>
 			</classpath>
+			<jvmarg value="-Djava.library.path=${native}"/>
 			<jvmarg value="-Djna.library.path=${native}"/>
 			<batchtest>
 				<fileset refid="src-tests"/>
