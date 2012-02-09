@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project>
-<project name="Thesis" default="build">
+<project name="barriers" default="build">
 	<property name="lib" location="lib"/>
 	<property name="native" location="${lib}/native"/>
 	<property name="src" location="src"/>
